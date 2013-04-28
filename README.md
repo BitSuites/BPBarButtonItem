@@ -22,32 +22,38 @@ There are 3 main ways to use BPBarButtonItem:
 This will allow you to create a brand new `UIBarButtonItem` on the fly. You can use any of the predefined styles or set your own tint color.
 
 ```objective-c
-self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Action" target:self  action:@selector(buttonAction:)];```
+self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Action" target:self  action:@selector(buttonAction:)];
+```
 ```objective-c
-self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithTintColor:[UIColor redColor] title:@"Red" target:self action:@selector(buttonAction:)];```
+self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithTintColor:[UIColor redColor] title:@"Red" target:self action:@selector(buttonAction:)];
+```
 
 ### Styling an existing button (often from a nib or Storyboard)
 
 This will style any existing `UIBarButtonItem`. The title, action, and any other attributes are not modified. This works from an `IBOutlet` or by accessing the `navigationItem`'s right and left button properties directly.
 
 ```objective-c
-[BPBarButtonItem customizeBarButtonItem:self.navigationItem.rightBarButtonItem withStyle:BPBarButtonItemStyleStandardDark];```
+[BPBarButtonItem customizeBarButtonItem:self.navigationItem.rightBarButtonItem withStyle:BPBarButtonItemStyleStandardDark];
+```
 ```objective-c
-[BPBarButtonItem customizeBarButtonItem:self.navigationItem.rightBarButtonItem withTintColor:[UIColor colorWithRed:0.048 green:0.169 blue:0.458 alpha:1.000]];```
+[BPBarButtonItem customizeBarButtonItem:self.navigationItem.rightBarButtonItem withTintColor:[UIColor colorWithRed:0.048 green:0.169 blue:0.458 alpha:1.000]];
+```
 
 ### Styling ALL the buttons using an Appearance Proxy
 
 Want to style all the buttons in your app to be consistent, but don't want to set them all individually? Setting the default button style is almost identical to styling an existing button, except you pass in `nil` for the button item. You'll generally want to do this as part of your `application:didFinishLaunchingWithOptions:` method.
 
 ```objective-c
-[BPBarButtonItem customizeBarButtonItem:nil withStyle:BPBarButtonItemStyleStandardDark];```
+[BPBarButtonItem customizeBarButtonItem:nil withStyle:BPBarButtonItemStyleStandardDark];
+```
 
 Note that with the Appearance Proxy method, you can still override individual buttons using the existing button styling method above.
 
 You can also get complex and pass in a specific Appearance Proxy as well. For example, this may be used to stylize buttons in a `UINavigationBar` but not those in a `UIToolbar`.
 
 ```objective-c
-[BPBarButtonItem customizeBarButtonItem:[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] withStyle:BPBarButtonItemStyleStandardLight];```
+[BPBarButtonItem customizeBarButtonItem:[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] withStyle:BPBarButtonItemStyleStandardLight];
+```
 
 ## Things BPBarButtonItem Can't Do
 
