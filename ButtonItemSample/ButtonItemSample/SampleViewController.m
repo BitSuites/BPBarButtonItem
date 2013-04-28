@@ -20,7 +20,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
 	
 	self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-	self.navigationItem.rightBarButtonItems = @[[BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Done" target:nil action:nil], [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleStandard title:@"Done" target:nil action:nil], [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil]];
+	self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Action" target:nil action:nil];
+	self.navigationItem.leftBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleStandard title:@"Standard" target:nil action:nil];
 }
 
 - (void)didReceiveMemoryWarning{
