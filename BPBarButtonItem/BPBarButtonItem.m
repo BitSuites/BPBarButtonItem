@@ -31,6 +31,15 @@
 	return item;
 }
 
++ (void)customizeBarButtonItem:(UIBarButtonItem *)item withStyle:(BPBarButtonItemStyle)style{
+	if(style == BPBarButtonItemStyleAction)
+		[self customizeBarButtonItem:item withTintColor:kActionColor];
+	else if(style == BPBarButtonItemStyleStandardDark)
+		[self customizeBarButtonItem:item withTintColor:kStandardDarkColor];
+	else if(style == BPBarButtonItemStyleStandardLight)
+		[self customizeBarButtonItem:item withTintColor:kStandardLightColor];
+}
+
 + (void)customizeBarButtonItem:(UIBarButtonItem *)item withTintColor:(UIColor *)tintColor{
 	// nil button item means customize appearance proxy
 	if(!item){

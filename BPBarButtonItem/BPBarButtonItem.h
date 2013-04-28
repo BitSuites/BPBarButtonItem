@@ -20,6 +20,7 @@ typedef enum : NSInteger {
 + (id)barButtonItemWithTintColor:(UIColor *)tintColor title:(NSString *)title target:(id)target action:(SEL)action;
 
 // Skin all or specific bar button items
++ (void)customizeBarButtonItem:(UIBarButtonItem *)item withStyle:(BPBarButtonItemStyle)style;
 + (void)customizeBarButtonItem:(UIBarButtonItem *)item withTintColor:(UIColor *)tintColor;
 
 @end
