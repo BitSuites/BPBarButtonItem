@@ -9,7 +9,8 @@
 
 typedef enum : NSInteger {
 	BPBarButtonItemStyleAction,
-	BPBarButtonItemStyleStandard
+	BPBarButtonItemStyleStandardDark,
+	BPBarButtonItemStyleStandardLight
 } BPBarButtonItemStyle;
 
 @interface BPBarButtonItem : NSObject

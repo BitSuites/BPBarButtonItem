@@ -22,7 +22,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wwe-zX-C8v">
             <objects>
-                <navigationController id="ZXO-eZ-ylc" sceneMemberID="viewController">
+                <navigationController modalTransitionStyle="flipHorizontal" id="ZXO-eZ-ylc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hh7-4V-C6t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -38,11 +38,6 @@
             <point key="canvasLocation" x="142" y="169"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="SampleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SampleViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

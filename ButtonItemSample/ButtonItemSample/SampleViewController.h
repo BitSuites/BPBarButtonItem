@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BPBarButtonItem.h"
 
 @interface SampleViewController : UIViewController
+
+@property (nonatomic, assign) BPBarButtonItemStyle buttonStyle;
 
 @end

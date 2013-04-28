@@ -8,15 +8,18 @@
 #import "BPBarButtonItem.h"
 
 #define kActionColor [UIColor colorWithRed:54.0/255.0 green:139.0/255.0 blue:229/255.0 alpha:1.0]
-#define kStandardColor [UIColor colorWithWhite:0.25 alpha:1.0]
+#define kStandardDarkColor [UIColor colorWithWhite:0.25 alpha:1.0]
+#define kStandardLightColor [UIColor colorWithRed:0.440 green:0.525 blue:0.673 alpha:1.000]
 
 @implementation BPBarButtonItem
 
 + (id)barButtonItemWithStyle:(BPBarButtonItemStyle)style title:(NSString *)title target:(id)target action:(SEL)action{
 	if(style == BPBarButtonItemStyleAction)
 		return [self barButtonItemWithTintColor:kActionColor title:title target:target action:action];
-	else if(style == BPBarButtonItemStyleStandard)
-		return [self barButtonItemWithTintColor:kStandardColor title:title target:target action:action];
+	else if(style == BPBarButtonItemStyleStandardDark)
+		return [self barButtonItemWithTintColor:kStandardDarkColor title:title target:target action:action];
+	else if(style == BPBarButtonItemStyleStandardLight)
+		return [self barButtonItemWithTintColor:kStandardLightColor title:title target:target action:action];
 	
 	return nil;
 }
