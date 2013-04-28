@@ -3,8 +3,13 @@ BPBarButtonItem
 
 BPBarButtonItem is a tool for making awesome looking custom UIBarButtonItems on the fly. BPBarButtonItem is *NOT* a subclass of `UIBarButtonItem` but an `NSObject` which creates skinned plain `UIBarButtonItem`s for use however you want. BPBarButtonItem can also be used to skin `UIBarButtonItem`s which have already been created, like in a nib or Storyboard. Generated buttons have support for both orientation styles.
 
-![BPBarButtonItem Screenshot 1][sshot1] &nbsp;&nbsp;&nbsp;&nbsp; ![BPBarButtonItem Screenshot 2][sshot2]
-![BPBarButtonItem Screenshot 3][sshot3] &nbsp;&nbsp;&nbsp;&nbsp; ![BPBarButtonItem Screenshot 4][sshot4]
+![BPBarButtonItem Screenshot 1][sshot1]<br>
+<br>
+![BPBarButtonItem Screenshot 2][sshot2]<br>
+<br>
+![BPBarButtonItem Screenshot 3][sshot3]<br>
+<br>
+![BPBarButtonItem Screenshot 4][sshot4]<br>
 
 ## Installation
 
