@@ -21,9 +21,9 @@ There are 3 main ways to use BPBarButtonItem:
 
 This will allow you to create a brand new `UIBarButtonItem` on the fly. You can use any of the predefined styles or set your own tint color.
 
-```objective-c
+````objective-c
 self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Action" target:self  action:@selector(buttonAction:)];
-```
+````
 ```objective-c
 self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithTintColor:[UIColor redColor] title:@"Red" target:self action:@selector(buttonAction:)];
 ```
@@ -85,10 +85,10 @@ THE SOFTWARE.
 
 ## Contact and Attribution
 
-Attribution is nice, but not necessary.
+Attribution is nice, but not necessary.<br>
 https://twitter.com/CoryImdieke
 
-Thanks to Brian Gilham for help with the design details.
+Thanks to Brian Gilham for help with the design details.<br>
 https://twitter.com/bgilham
 
 [sshot1]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-1.png
