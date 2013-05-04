@@ -7,11 +7,16 @@
 //
 
 #import "SampleAppDelegate.h"
+#import "BPBarButtonItem.h"
 
 @implementation SampleAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     // Override point for customization after application launch.
+	
+	// This sets the appearance proxy which ultimately sets the back button in the second test controller
+	[BPBarButtonItem customizeBarButtonItem:nil withStyle:BPBarButtonItemStyleStandardDark];
+	
     return YES;
 }
 							

@@ -7,6 +7,11 @@
 
 #import "BPBarButtonItem.h"
 
+typedef enum : NSInteger {
+	BPBarButtonItemTypeStandard,
+	BPBarButtonItemTypeBack
+} BPBarButtonItemType;
+
 #define kActionColor [UIColor colorWithRed:54.0/255.0 green:139.0/255.0 blue:229/255.0 alpha:1.0]
 #define kStandardDarkColor [UIColor colorWithWhite:0.25 alpha:1.0]
 #define kStandardLightColor [UIColor colorWithRed:0.440 green:0.525 blue:0.673 alpha:1.000]
@@ -46,32 +51,45 @@
 		item = [UIBarButtonItem appearance];
 	}
 	
-	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-	[item setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	// Portrait Normal Buttons
+	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	[item setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeStandard] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
 	
-	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
-	[item setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
+	// Portrait Back Buttons
+	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
+	// Landscape Normal Buttons
+	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
+	[item setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
+	
+	// Landscape Back Buttons
+	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
+	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
 }
 
-+ (UIImage *)stretchableButtonImageForTintColor:(UIColor *)tintColor barMetrics:(UIBarMetrics)metrics{
-	CGFloat pixelsWide = 9.0;
++ (UIImage *)stretchableButtonImageForTintColor:(UIColor *)tintColor barMetrics:(UIBarMetrics)metrics forType:(BPBarButtonItemType)type{
+	CGFloat pixelsWide = (type == BPBarButtonItemTypeStandard) ? 9.0 : 23.0;
 	CGFloat pixelsHigh = (metrics == UIBarMetricsDefault) ? 30.0 : 24.0;
 	CGFloat drawScale = [[UIScreen mainScreen] scale];
 	
 	UIGraphicsBeginImageContextWithOptions(CGSizeMake(pixelsWide, pixelsHigh), NO, drawScale);
 	CGContextRef bitmapContext = UIGraphicsGetCurrentContext();
 	
-	[self drawButtonStyleForRect:CGRectMake(0.0, 0.0, pixelsWide, pixelsHigh) inContext:bitmapContext  withTintColor:tintColor];
+	[self drawButtonStyleForRect:CGRectMake(0.0, 0.0, pixelsWide, pixelsHigh) inContext:bitmapContext  withTintColor:tintColor forType:type];
 	
 	CGImageRef image = CGBitmapContextCreateImage(bitmapContext);
 	UIImage *newImage = [[UIImage alloc] initWithCGImage:image scale:drawScale orientation:UIImageOrientationUp];
 	CGImageRelease(image);
 	UIGraphicsPopContext();
 	
-	return [newImage resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 4.0)];
+	// Insets are a bit different for standard and back buttons for the arrow
+	UIEdgeInsets insets = (type == BPBarButtonItemTypeStandard) ? UIEdgeInsetsMake(0.0, 4.0, 0.0, 4.0) : UIEdgeInsetsMake(0.0, 15.0, 0.0, 6.0);
+	
+	return [newImage resizableImageWithCapInsets:insets];
 }
 
-+ (void)drawButtonStyleForRect:(CGRect)rect inContext:(CGContextRef)context withTintColor:(UIColor *)tintColor{
++ (void)drawButtonStyleForRect:(CGRect)rect inContext:(CGContextRef)context withTintColor:(UIColor *)tintColor forType:(BPBarButtonItemType)type{	
 	// RGB Space
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 	
@@ -89,22 +107,53 @@
 	CGSize bottomShadowOffset = CGSizeMake(0.0, 1.0);
 	CGFloat bottomShadowBlurRadius = 0.0;
 	
-	// Size Values
-	CGRect buttonRect = CGRectMake(rect.origin.x + 1.0, rect.origin.y + 1.0, rect.size.width - 2.0, rect.size.height - 3.0);
-	CGFloat buttonCornerRadius = 4.5;
-	
-	// Button Drawing
-	UIBezierPath *buttonPath = [UIBezierPath bezierPathWithRoundedRect:buttonRect cornerRadius:buttonCornerRadius];
-	CGContextSaveGState(context);
-	[buttonPath addClip];
-	CGContextDrawLinearGradient(context, gradient, CGPointZero, CGPointMake(0.0, buttonRect.size.height + 1.0), 0);
-	CGContextRestoreGState(context);
-	CGContextSaveGState(context);
-	CGContextSetShadowWithColor(context, bottomShadowOffset, bottomShadowBlurRadius, bottomShadowColor.CGColor);
-	[strokeColor setStroke];
-	buttonPath.lineWidth = 1.0;
-	[buttonPath stroke];
-	CGContextRestoreGState(context);
+	if(type == BPBarButtonItemTypeStandard){
+		// Size Values
+		CGRect buttonRect = CGRectMake(rect.origin.x + 1.0, rect.origin.y + 1.0, rect.size.width - 2.0, rect.size.height - 3.0);
+		CGFloat buttonCornerRadius = 4.5;
+		
+		// Button Drawing
+		UIBezierPath *buttonPath = [UIBezierPath bezierPathWithRoundedRect:buttonRect cornerRadius:buttonCornerRadius];
+		CGContextSaveGState(context);
+		[buttonPath addClip];
+		CGContextDrawLinearGradient(context, gradient, CGPointZero, CGPointMake(0.0, buttonRect.size.height + 1.0), 0);
+		CGContextRestoreGState(context);
+		CGContextSaveGState(context);
+		CGContextSetShadowWithColor(context, bottomShadowOffset, bottomShadowBlurRadius, bottomShadowColor.CGColor);
+		[strokeColor setStroke];
+		buttonPath.lineWidth = 1.0;
+		[buttonPath stroke];
+		CGContextRestoreGState(context);
+	} else if(type == BPBarButtonItemTypeBack){
+		// Size Values
+		CGRect buttonRect = CGRectMake(rect.origin.x + 1.0, rect.origin.y + 1.0, rect.size.width - 2.0, rect.size.height - 3.0);
+		
+		// Back Button Drawing
+		UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+		[bezierPath moveToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 5)];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMaxY(buttonRect) - 5)];
+		[bezierPath addCurveToPoint: CGPointMake(CGRectGetMaxX(buttonRect) - 5, CGRectGetMaxY(buttonRect)) controlPoint1: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMaxY(buttonRect) - 2.24) controlPoint2: CGPointMake(CGRectGetMaxX(buttonRect) - 2.24, CGRectGetMaxY(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + 13.5, CGRectGetMaxY(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect), CGRectGetMinY(buttonRect) + 0.50000 * CGRectGetHeight(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + 13.5, CGRectGetMinY(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMaxX(buttonRect) - 5, CGRectGetMinY(buttonRect))];
+		[bezierPath addCurveToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 5) controlPoint1: CGPointMake(CGRectGetMaxX(buttonRect) - 2.24, CGRectGetMinY(buttonRect)) controlPoint2: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 2.24)];
+		[bezierPath closePath];
+		CGContextSaveGState(context);
+		[bezierPath addClip];
+		CGRect bezierBounds = CGPathGetPathBoundingBox(bezierPath.CGPath);
+		CGContextDrawLinearGradient(context, gradient,
+									CGPointMake(CGRectGetMidX(bezierBounds), CGRectGetMinY(bezierBounds)),
+									CGPointMake(CGRectGetMidX(bezierBounds), CGRectGetMaxY(bezierBounds)),
+									0);
+		CGContextRestoreGState(context);
+		CGContextSaveGState(context);
+		CGContextSetShadowWithColor(context, bottomShadowOffset, bottomShadowBlurRadius, bottomShadowColor.CGColor);
+		[strokeColor setStroke];
+		bezierPath.lineWidth = 1;
+		[bezierPath stroke];
+		CGContextRestoreGState(context);
+	}
 	
 	// Memory Mgmt
 	CGGradientRelease(gradient);
