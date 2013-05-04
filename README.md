@@ -1,7 +1,7 @@
 BPBarButtonItem
 ===============
 
-BPBarButtonItem is a tool for making awesome looking custom UIBarButtonItems on the fly. BPBarButtonItem is *NOT* a subclass of `UIBarButtonItem` but an `NSObject` which creates skinned plain `UIBarButtonItem`s for use however you want. BPBarButtonItem can also be used to skin `UIBarButtonItem`s which have already been created, like in a nib or Storyboard. Generated buttons have support for both orientation styles.
+BPBarButtonItem is a tool for making awesome looking custom UIBarButtonItems on the fly. BPBarButtonItem is *NOT* a subclass of `UIBarButtonItem` but an `NSObject` which creates skinned plain `UIBarButtonItem`s for use however you want. BPBarButtonItem can also be used to skin `UIBarButtonItem`s which have already been created, like in a nib or Storyboard. Generated buttons have support for both orientation styles, and automatically show up properly for back buttons.
 
 ![BPBarButtonItem Screenshot 1][sshot1]<br>
 <br>
@@ -10,6 +10,10 @@ BPBarButtonItem is a tool for making awesome looking custom UIBarButtonItems on 
 ![BPBarButtonItem Screenshot 3][sshot3]<br>
 <br>
 ![BPBarButtonItem Screenshot 4][sshot4]<br>
+<br>
+![BPBarButtonItem Screenshot 5][sshot5]<br>
+<br>
+![BPBarButtonItem Screenshot 6][sshot6]<br>
 
 ## Installation
 
@@ -100,3 +104,5 @@ https://twitter.com/bgilham
 [sshot2]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-2.png
 [sshot3]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-3.png
 [sshot4]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-4.png
+[sshot5]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-5.png
+[sshot6]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-6.png
