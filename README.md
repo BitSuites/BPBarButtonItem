@@ -17,6 +17,10 @@ BPBarButtonItem is a tool for making awesome looking custom UIBarButtonItems on 
 
 ## Installation
 
+### From [CocoaPods](http://cocoapods.org/?q=bpbarbuttonitem)
+
+	pod 'BPBarButtonItem'
+
 ### From Source
 
 * Drag the `BPBarButtonItem/` folder to your project (make sure you copy all files/folders)
@@ -64,9 +68,21 @@ You can also get complex and pass in a specific Appearance Proxy as well. For ex
 [BPBarButtonItem customizeBarButtonItem:[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] withStyle:BPBarButtonItemStyleStandardLight];
 ```
 
+### Styling Segmented Controls
+
+You can style a `UISegmentedControl` directly or using an Appearance Proxy. The syntax is similar to UIBarButtonItems as shown above.
+
+```objective-c
+[BPBarButtonItem customizeSegmentedControl:mySegmentedControl withStyle:BPBarButtonItemStyleStandardDark];
+```
+
+```objective-c
+[BPBarButtonItem customizeSegmentedControl:nil withStyle:BPBarButtonItemStyleStandardDark];
+```
+
 ## Things BPBarButtonItem Can't Do
 
-BPBarButtonItem makes standard, plain-old `UIBarButtonItem`s, and as such they have the same limitations. You can't use them outside of a navigation bar or a toolbar. If you're looking for a nicely styled `UIButton` alternative, check out [BButton](https://github.com/mattlawer/BButton). They also can't be used to stylize a `UISegmentedControl`.
+BPBarButtonItem makes standard, plain-old `UIBarButtonItem`s, and as such they have the same limitations. You can't use them outside of a navigation bar or a toolbar. If you're looking for a nicely styled `UIButton` alternative, check out [BButton](https://github.com/mattlawer/BButton).
 
 ## License
 
@@ -100,9 +116,9 @@ https://twitter.com/CoryImdieke
 Thanks to Brian Gilham for help with the design details.<br>
 https://twitter.com/bgilham
 
-[sshot1]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-1.png
-[sshot2]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-2.png
-[sshot3]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-3.png
-[sshot4]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-4.png
-[sshot5]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-5.png
-[sshot6]:https://raw.github.com/Vortec4800/BPBarButtonItem/master/Screenshots/screenshot-6.png
+[sshot1]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-1.png
+[sshot2]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-2.png
+[sshot3]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-3.png
+[sshot4]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-4.png
+[sshot5]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-5.png
+[sshot6]:https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-6.png
