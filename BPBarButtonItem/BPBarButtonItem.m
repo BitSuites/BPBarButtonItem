@@ -59,7 +59,7 @@ typedef enum : NSInteger {
 	// Portrait Back Buttons
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-	[item setBackButtonTitlePositionAdjustment:UIOffsetMake(-1.5, 0.0) forBarMetrics:UIBarMetricsDefault];
+	[item setBackButtonTitlePositionAdjustment:UIOffsetMake(-1.0, 0.0) forBarMetrics:UIBarMetricsDefault];
 
 	// Landscape Normal Buttons
 	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
@@ -68,7 +68,7 @@ typedef enum : NSInteger {
 	// Landscape Back Buttons
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
-	[item setBackButtonTitlePositionAdjustment:UIOffsetMake(-2.0, 0.0) forBarMetrics:UIBarMetricsLandscapePhone];
+	[item setBackButtonTitlePositionAdjustment:UIOffsetMake(-1.0, 0.0) forBarMetrics:UIBarMetricsLandscapePhone];
 }
 
 + (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withStyle:(BPBarButtonItemStyle)style{
