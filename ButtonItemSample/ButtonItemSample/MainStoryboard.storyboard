@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Sample View Controller - Sample-->
+        <!--Sample View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="SampleViewController" sceneMemberID="viewController">
@@ -30,7 +30,18 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sample" id="pSz-Pr-Pop"/>
+                    <navigationItem key="navigationItem" id="pSz-Pr-Pop">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="qVW-w5-Yeo">
+                            <rect key="frame" x="73" y="7" width="173" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Styled"/>
+                                <segment title="Seg"/>
+                                <segment title="Control"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
