@@ -58,6 +58,7 @@ typedef enum : NSInteger {
 	// Portrait Back Buttons
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [item setBackButtonTitlePositionAdjustment:UIOffsetMake(-1.5, 0.0) forBarMetrics:UIBarMetricsDefault];
 	
 	// Landscape Normal Buttons
 	[item setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
@@ -66,6 +67,7 @@ typedef enum : NSInteger {
 	// Landscape Back Buttons
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
+    [item setBackButtonTitlePositionAdjustment:UIOffsetMake(-2.0, 0.0) forBarMetrics:UIBarMetricsLandscapePhone];
 }
 
 + (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withStyle:(BPBarButtonItemStyle)style{
@@ -173,15 +175,16 @@ typedef enum : NSInteger {
 	} else if(type == BPBarButtonItemTypeBack){
 		// Size Values
 		CGRect buttonRect = CGRectMake(rect.origin.x + 1.0, rect.origin.y + 1.0, rect.size.width - 2.0, rect.size.height - 3.0);
-		
+        CGFloat buttonPoint = (rect.size.height / 3.0) + 0.5;
+        
 		// Back Button Drawing
 		UIBezierPath* bezierPath = [UIBezierPath bezierPath];
 		[bezierPath moveToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 5)];
 		[bezierPath addLineToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMaxY(buttonRect) - 5)];
 		[bezierPath addCurveToPoint: CGPointMake(CGRectGetMaxX(buttonRect) - 5, CGRectGetMaxY(buttonRect)) controlPoint1: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMaxY(buttonRect) - 2.24) controlPoint2: CGPointMake(CGRectGetMaxX(buttonRect) - 2.24, CGRectGetMaxY(buttonRect))];
-		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + 13.5, CGRectGetMaxY(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + buttonPoint, CGRectGetMaxY(buttonRect))];
 		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect), CGRectGetMinY(buttonRect) + 0.50000 * CGRectGetHeight(buttonRect))];
-		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + 13.5, CGRectGetMinY(buttonRect))];
+		[bezierPath addLineToPoint: CGPointMake(CGRectGetMinX(buttonRect) + buttonPoint, CGRectGetMinY(buttonRect))];
 		[bezierPath addLineToPoint: CGPointMake(CGRectGetMaxX(buttonRect) - 5, CGRectGetMinY(buttonRect))];
 		[bezierPath addCurveToPoint: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 5) controlPoint1: CGPointMake(CGRectGetMaxX(buttonRect) - 2.24, CGRectGetMinY(buttonRect)) controlPoint2: CGPointMake(CGRectGetMaxX(buttonRect), CGRectGetMinY(buttonRect) + 2.24)];
 		[bezierPath closePath];
