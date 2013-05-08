@@ -23,4 +23,8 @@ typedef enum : NSInteger {
 + (void)customizeBarButtonItem:(UIBarButtonItem *)item withStyle:(BPBarButtonItemStyle)style;
 + (void)customizeBarButtonItem:(UIBarButtonItem *)item withTintColor:(UIColor *)tintColor;
 
+// Skin all or specific segmented controls
++ (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withStyle:(BPBarButtonItemStyle)style;
++ (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withTintColor:(UIColor *)tintColor;
+
 @end
