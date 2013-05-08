@@ -68,6 +68,34 @@ typedef enum : NSInteger {
 	[item setBackButtonBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeBack] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
 }
 
++ (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withStyle:(BPBarButtonItemStyle)style{
+	if(style == BPBarButtonItemStyleAction)
+		[self customizeSegmentedControl:segmentedControl withTintColor:kActionColor];
+	else if(style == BPBarButtonItemStyleStandardDark)
+		[self customizeSegmentedControl:segmentedControl withTintColor:kStandardDarkColor];
+	else if(style == BPBarButtonItemStyleStandardLight)
+		[self customizeSegmentedControl:segmentedControl withTintColor:kStandardLightColor];
+}
+
++ (void)customizeSegmentedControl:(UISegmentedControl *)segmentedControl withTintColor:(UIColor *)tintColor{
+    // nil segmented control means customize appearance proxy
+    if (!segmentedControl){
+        segmentedControl = [UISegmentedControl appearance];
+    }
+    
+    // Portrait Segmented Controls
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeStandard] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsDefault forType:BPBarButtonItemTypeStandard] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segmentedControl setDividerImage:[self segmentedControlDividerImageForTintColor:tintColor barMetrics:UIBarMetricsDefault] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    // Landscape Segmented Controls
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateHighlighted barMetrics:UIBarMetricsLandscapePhone];
+    [segmentedControl setBackgroundImage:[self stretchableButtonImageForTintColor:[self lighterColorFromColor:tintColor modificationAmount:0.1] barMetrics:UIBarMetricsLandscapePhone forType:BPBarButtonItemTypeStandard] forState:UIControlStateSelected barMetrics:UIBarMetricsLandscapePhone];
+    [segmentedControl setDividerImage:[self segmentedControlDividerImageForTintColor:tintColor barMetrics:UIBarMetricsLandscapePhone] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsLandscapePhone];
+}
+
 + (UIImage *)stretchableButtonImageForTintColor:(UIColor *)tintColor barMetrics:(UIBarMetrics)metrics forType:(BPBarButtonItemType)type{
 	CGFloat pixelsWide = (type == BPBarButtonItemTypeStandard) ? 9.0 : 23.0;
 	CGFloat pixelsHigh = (metrics == UIBarMetricsDefault) ? 30.0 : 24.0;
@@ -87,6 +115,24 @@ typedef enum : NSInteger {
 	UIEdgeInsets insets = (type == BPBarButtonItemTypeStandard) ? UIEdgeInsetsMake(0.0, 4.0, 0.0, 4.0) : UIEdgeInsetsMake(0.0, 15.0, 0.0, 6.0);
 	
 	return [newImage resizableImageWithCapInsets:insets];
+}
+
++ (UIImage *)segmentedControlDividerImageForTintColor:(UIColor *)tintColor barMetrics:(UIBarMetrics)metrics{
+    CGFloat pixelsWide = 1.0;
+    CGFloat pixelsHigh = (metrics == UIBarMetricsDefault) ? 30.0 : 24.0;
+    CGFloat drawScale = [[UIScreen mainScreen] scale];
+	
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(pixelsWide, pixelsHigh), NO, drawScale);
+	CGContextRef bitmapContext = UIGraphicsGetCurrentContext();
+	
+    [self drawSegmentedControlDividerStyleForRect:CGRectMake(0.0, 0.0, pixelsWide, pixelsHigh) inContext:bitmapContext withTintColor:tintColor];
+	
+	CGImageRef image = CGBitmapContextCreateImage(bitmapContext);
+	UIImage *newImage = [[UIImage alloc] initWithCGImage:image scale:drawScale orientation:UIImageOrientationUp];
+	CGImageRelease(image);
+	UIGraphicsPopContext();
+    
+    return newImage;
 }
 
 + (void)drawButtonStyleForRect:(CGRect)rect inContext:(CGContextRef)context withTintColor:(UIColor *)tintColor forType:(BPBarButtonItemType)type{	
@@ -157,6 +203,34 @@ typedef enum : NSInteger {
 	
 	// Memory Mgmt
 	CGGradientRelease(gradient);
+	CGColorSpaceRelease(colorSpace);
+}
+
++ (void)drawSegmentedControlDividerStyleForRect:(CGRect)rect inContext:(CGContextRef)context withTintColor:(UIColor *)tintColor{
+    // RGB Space
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	
+	// Colors
+	UIColor *strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+	UIColor *bottomShadowColor = [[UIColor whiteColor] colorWithAlphaComponent:0.190];
+	
+	// Divider Shadow Values
+	CGSize bottomShadowOffset = CGSizeMake(0.0, 1.0);
+	CGFloat bottomShadowBlurRadius = 0.0;
+    
+    // Size Values
+    CGRect dividerRect = CGRectMake(rect.origin.x, rect.origin.y + 1.0, rect.size.width, rect.size.height - 3.0);
+    
+    // Divider Drawing
+    UIBezierPath *dividerPath = [UIBezierPath bezierPathWithRect:dividerRect];
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, bottomShadowOffset, bottomShadowBlurRadius, bottomShadowColor.CGColor);
+    [strokeColor setStroke];
+    dividerPath.lineWidth = 1.0;
+    [dividerPath stroke];
+    CGContextRestoreGState(context);
+	
+	// Memory Mgmt
 	CGColorSpaceRelease(colorSpace);
 }
 
