@@ -33,6 +33,8 @@
 	// These override the appearance proxy settings we have in the delegate
 	self.navigationItem.rightBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:BPBarButtonItemStyleAction title:@"Action" target:self	action:@selector(switchStyles)];
 	self.navigationItem.leftBarButtonItem = [BPBarButtonItem barButtonItemWithStyle:self.buttonStyle title:@"Standard" target:self action:@selector(switchStyles)];
+    
+    [BPBarButtonItem customizeSegmentedControl:(id)[self.navigationItem titleView] withStyle:self.buttonStyle];
 }
 
 - (void)didReceiveMemoryWarning{
