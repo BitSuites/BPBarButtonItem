@@ -6,6 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/BitSuites/BPBarButtonItem"
   s.license      = 'MIT'
   s.author       = { "Cory Imdieke" => "coryi@bitsuites.com" }
+  s.screenshots  = "https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-1.png", "https://raw.github.com/BitSuites/BPBarButtonItem/master/Screenshots/screenshot-3.png"
   s.source       = { :git => "https://github.com/BitSuites/BPBarButtonItem.git", :tag => "0.0.3" }
   s.platform     = :ios, '5.0'
   s.source_files = 'BPBarButtonItem'
